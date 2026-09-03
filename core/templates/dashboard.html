@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4">Tổng Quan Hệ Thống</h2>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card bg-primary text-white mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Khách hàng</h5>
+                <h2>{{ total_customers }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-success text-white mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Xe Đã Tiếp Nhận</h5>
+                <h2>{{ total_vehicles }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-warning text-dark mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Xe Đang Sửa</h5>
+                <h2>{{ active_orders }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4>Lệnh Sửa Chữa Gần Đây</h4>
+<table class="table table-striped table-hover bg-white mt-3">
+    <thead>
+        <tr><th>ID</th><th>Biển số</th><th>Trạng thái</th><th>Ngày tạo</th></tr>
+    </thead>
+    <tbody>
+        {% for order in recent_orders %}
+        <tr>
+            <td>#{{ order.id }}</td>
+            <td><b>{{ order.vehicle.license_plate }}</b></td>
+            <td><span class="badge bg-info text-dark">{{ order.get_status_display }}</span></td>
+            <td>{{ order.created_at|date:"d/m/Y H:i" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
