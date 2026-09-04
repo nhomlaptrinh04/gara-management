@@ -20,9 +20,9 @@
 
 {% if request.user.groups.all.0.name == 'ThuKho' or request.user.is_superuser %}
 <li class="nav-item">
-    <a class="nav-link text-white" href="{% url 'inventory' %}">
-        <i class="fas fa-boxes"></i> Kho Linh Kiện
-        <!-- Menu chung cho các vai trò -->
+    <a class="nav-link text-white" href="{% url 'inventory' %}"><i class="fas fa-boxes"></i> Kho Linh Kiện</a>
+</li>
+{% endif %}
 <li class="nav-item">
     <a href="/orders/new/" class="nav-link text-white"><i class="fas fa-plus-circle"></i> Tạo đơn hàng</a>
 </li>
