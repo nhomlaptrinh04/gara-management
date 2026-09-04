@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+    <h1 class="h3 mb-4 text-gray-800">Quản Lý Linh Kiện Kho</h1>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Mã linh kiện</th>
+                <th>Tên linh kiện</th>
+                <th>Số lượng</th>
+                <th>Giá nhập</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for part in parts %}
+            <tr>
+                <td>{{ part.code }}</td>
+                <td>{{ part.name }}</td>
+                <td>{{ part.quantity }}</td>
+                <td>{{ part.price }} VNĐ</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
