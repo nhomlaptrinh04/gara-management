@@ -22,6 +22,64 @@
 <li class="nav-item">
     <a class="nav-link text-white" href="{% url 'inventory' %}">
         <i class="fas fa-boxes"></i> Kho Linh Kiện
+        <!-- Menu chung cho các vai trò -->
+<li class="nav-item">
+    <a href="/orders/new/" class="nav-link text-white"><i class="fas fa-plus-circle"></i> Tạo đơn hàng</a>
+</li>
+
+<!-- 1. Kho Linh Kiện (Thủ kho) -->
+{% if request.user.groups.all.0.name == 'ThuKho' or request.user.is_superuser %}
+<li class="nav-item">
+    <a class="nav-link text-white" href="{% url 'inventory' %}">
+        <i class="fas fa-boxes"></i> Kho Linh Kiện
+    </a>
+</li>
+{% endif %}
+
+<!-- 2. Lễ Tân (Tiếp nhận xe / Khách hàng) -->
+{% if request.user.groups.all.0.name == 'LeTan' or request.user.is_superuser %}
+<li class="nav-item">
+    <a class="nav-link text-white" href="{% url 'receptionist' %}">
+        <i class="fas fa-user-check"></i> Tiếp Nhận Xe
+    </a>
+</li>
+{% endif %}
+
+<!-- 3. Kế Toán / Thu Ngân -->
+{% if request.user.groups.all.0.name == 'KeToan' or request.user.is_superuser %}
+<li class="nav-item">
+    <a class="nav-link text-white" href="{% url 'accounting' %}">
+        <i class="fas fa-file-invoice-dollar"></i> Kế Toán & Hóa Đơn
+    </a>
+</li>
+{% endif %}
+
+<!-- 4. Thợ Máy (Sửa chữa) -->
+{% if request.user.groups.all.0.name == 'ThoMay' or request.user.is_superuser %}
+<li class="nav-item">
+    <a class="nav-link text-white" href="{% url 'mechanic' %}">
+        <i class="fas fa-tools"></i> Sửa Chữa Xe
+    </a>
+</li>
+{% endif %}
+
+<!-- 5. Quản Lý Kỹ Thuật -->
+{% if request.user.groups.all.0.name == 'QuanLyKyThuat' or request.user.is_superuser %}
+<li class="nav-item">
+    <a class="nav-link text-white" href="{% url 'tech_manager' %}">
+        <i class="fas fa-cogs"></i> Quản Lý Kỹ Thuật
+    </a>
+</li>
+{% endif %}
+
+<!-- 6. Chăm Sóc Khách Hàng -->
+{% if request.user.groups.all.0.name == 'CSKH' or request.user.is_superuser %}
+<li class="nav-item">
+    <a class="nav-link text-white" href="{% url 'cskh' %}">
+        <i class="fas fa-headset"></i> Chăm Sóc Khách Hàng
+    </a>
+</li>
+{% endif %}
     </a>
 </li>
 {% endif %}
