@@ -14,12 +14,14 @@
             <ul class="nav flex-column mt-3">
                 <li class="nav-item"><a href="/" class="nav-link text-white"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
                 <li class="nav-item"><a href="/customers/" class="nav-link text-white"><i class="bi bi-people"></i> Khách hàng</a></li>
-                <li class="nav-item"><a href="/orders/new/" class="nav-link text-white"><i class="bi bi-tools"></i> Lập lệnh sửa chữa</a></li>
-                {% if request.user.groups.all.0.name == 'ThuKho' or request.user.is_superuser %}
+           <li class="nav-item">
+    <a href="/orders/new/" class="nav-link text-white">Tạo đơn hàng</a>
+</li>
+
+{% if request.user.groups.all.0.name == 'ThuKho' or request.user.is_superuser %}
 <li class="nav-item">
-    <a class="nav-link" href="{% url 'inventory' %}">
-        <i class="fas fa-boxes"></i>
-        <span>Kho Linh Kiện</span>
+    <a class="nav-link text-white" href="{% url 'inventory' %}">
+        <i class="fas fa-boxes"></i> Kho Linh Kiện
     </a>
 </li>
 {% endif %}
