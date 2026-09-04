@@ -25,3 +25,28 @@ def order_create(request):
     else:
         form = WorkOrderForm()
     return render(request, 'form_template.html', {'form': form, 'title': 'Tạo Lệnh Sửa Chữa Mới'})
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.shortcuts import render
+from .models import SparePart
+
+def is_thu_kho(user):
+    return user.groups.filter(name='ThuKho').exists() or user.is_superuser
+
+@login_required
+@user_passes_test(is_thu_kho)
+def inventory_view(request):
+    parts = SparePart.objects.all()
+    return render(request, 'inventory.html', {'parts': parts})
+from .forms import SparePartForm
+
+@login_required
+@user_passes_test(is_thu_kho)
+def inventory_add(request):
+    if request.method == 'POST':
+        form = SparePartForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('inventory')
+    else:
+        form = SparePartForm()
+    return render(request, 'inventory_add.html', {'form': form})

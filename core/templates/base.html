@@ -15,6 +15,14 @@
                 <li class="nav-item"><a href="/" class="nav-link text-white"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
                 <li class="nav-item"><a href="/customers/" class="nav-link text-white"><i class="bi bi-people"></i> Khách hàng</a></li>
                 <li class="nav-item"><a href="/orders/new/" class="nav-link text-white"><i class="bi bi-tools"></i> Lập lệnh sửa chữa</a></li>
+                {% if request.user.groups.all.0.name == 'ThuKho' or request.user.is_superuser %}
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'inventory' %}">
+        <i class="fas fa-boxes"></i>
+        <span>Kho Linh Kiện</span>
+    </a>
+</li>
+{% endif %}
                 <li class="nav-item"><a href="/admin/" class="nav-link text-white"><i class="bi bi-gear"></i> Cấu hình hệ thống</a></li>
             </ul>
         </div>
