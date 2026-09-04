@@ -8,19 +8,12 @@ https://docs.djangoproject.com/en/6.1/howto/deployment/wsgi/
 """
 
 import os
-
-from django.core.wsgi import get_wsgi_application
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'gara_system.settings')
-
-application = get_wsgi_application()
-import os
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'gara_system.settings')
 application = get_wsgi_application()
 
-# Tự động tạo tài khoản nhân viên khi app khởi động trên Render
+# Tự động tạo tài khoản nhân viên và cấp quyền khi app khởi động
 try:
     from django.contrib.auth.models import User, Group
     staff_accounts = [
@@ -36,6 +29,9 @@ try:
         if created:
             user.set_password("MatKhauMacDinh123@")
             user.is_staff = True
+            # Cấp quyền Superuser cho tài khoản Thukho01 để quản trị toàn bộ hệ thống
+            if username == "Thukho01":
+                user.is_superuser = True
             user.save()
         group, _ = Group.objects.get_or_create(name=group_name)
         user.groups.add(group)
